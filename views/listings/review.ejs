@@ -1,0 +1,25 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container">
+    <% if (listing && review) { %>
+        <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=PUT" novalidate class="needs-validation">
+            <div class="card col-7 offset-2 show-card">
+                <h4 class="mt-3">Edit your Review</h4>
+                <div class="mb-3 mt-3">
+                    <label for="rating" class="form-label">Rating</label>
+                    <input type="range" min="1" max="5" name="review[rating]" id="rating" class="form-range" value="<%= review.rating %>">
+                </div>
+                <div class="mb-3 mt-2">
+                    <label for="comment" class="form-label">Comments</label>
+                    <textarea name="review[comment]" rows="10" class="form-control" required><%= review.comment %></textarea>
+                    <div class="invalid-feedback">
+                        Please add some comments for reviews
+                    </div>
+                </div>
+                <button class="btn btn-outline-dark">Submit</button>
+            </div>
+        </form>
+    <% } else { %>
+        <div class="alert alert-danger">Review or Listing not found</div>
+    <% } %>
+</div>
