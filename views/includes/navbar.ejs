@@ -1,33 +1,32 @@
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/listings"><i class="fa-brands fa-airbnb logo" ></i><span class="text">HomiFy</span></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" >
-        <span class="navbar-toggler-icon"></span>
+<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top ">
+  <div class="container-fluid">
+      <a class="navbar-brand ms-3" href="/listings">
+          <i class="fa-brands fa-airbnb logo"></i><span class="text">HomiFy</span>
+      </a>
+      <button class="navbar-toggler  " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+          <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-         
-          <a class="nav-link" href="/listings"><b>Home</b></a>
-          
-          
-        </div>
-        <div class="navbar-nav ms-auto">
-          <div class="container-fluid">
-            <form class="d-flex" role="search" >
-              <input class="form-control me-2 search-inp " type="search" placeholder="Search destination" aria-label="Search">
-              <button class="btn add-btn btn-search" type="submit" ><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-            </form>
+          <div class="navbar-nav">
+              <a class="nav-link new" href="/listings"><b>Home</b></a>
           </div>
-        </div>
-        <div class="navbar-nav ms-auto">
-          <a class="nav-link new" href="/listings/new"><b>HomiFy your home</b></a>
-          <% if (!currUser) { %>
-            <a class="nav-link new "  href="/signup"><b>Sign Up</b></a>
-            <a class="nav-link new" href="/login"><b>Log In</b></a>
-          <% } else { %>
-            <a class="nav-link new" href="/logout"><b>Log Out</b></a>
-          <% } %>
-        </div>
+          <div class="navbar-nav ms-auto">
+              <form class="d-flex" role="search">
+                  <input class="form-control me-2 search-inp search" type="search" placeholder="Search destination" aria-label="Search">
+                  <button class="btn add-btn btn-search search" type="submit">
+                      <i class="fa-solid fa-magnifying-glass"></i> Search
+                  </button>
+              </form>
+          </div>
+          <div class="navbar-nav ms-auto">
+              <a class="nav-link new " href="/listings/new"><b>HomiFy your home</b></a>
+              <% if (!currUser) { %>
+                  <a class="nav-link new mt-2" href="/signup"><b>Sign Up</b></a>
+                  <a class="nav-link new mt-2" href="/login"><b>Log In</b></a>
+              <% } else { %>
+                  <a class="nav-link new mt-2" href="/logout"><b>Log Out</b></a>
+              <% } %>
+          </div>
       </div>
-    </div>
-  </nav>
+  </div>
+</nav>
