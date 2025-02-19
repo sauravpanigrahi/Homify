@@ -133,7 +133,7 @@ display: flex;
     .search-inp{
         border-radius: 25px;
         width: 15rem;
-        margin-left: 4rem;
+        margin-left: ;
        
     }
     .logo{
@@ -239,10 +239,13 @@ font-weight: 900;
             }
         
             .navbar-nav {
-                width: 100%;
                 display: flex;
-                flex-direction: column;
-                align-items: center; /* Center align */
+               
+                align-items: center;
+                gap: 15px; /* Adjust spacing */
+            }
+            .navbar-nav.ms-auto {
+                margin-left: auto; /* Push items to the right */
             }
         
             .navbar-nav a {
@@ -304,8 +307,7 @@ padding: 0.8rem;
       }
       .navbar-collapse {
         display: flex;
-        flex-direction: column;
-        align-items: flex-start; /* Align items to the left */
-        padding-left: 1rem; /* Adjust spacing */
-        gap: 0.5rem; /* Add spacing between items */
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
     }
