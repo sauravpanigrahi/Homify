@@ -72,9 +72,9 @@ const sessionOptions={
         httpOnly:true,
     }
 };
-// app.get("/",(req,res)=>{
-//     res.send("welcome");
-// });
+app.get("/", (req, res) => {
+    res.render("listings/index"); // For EJS templates
+});
 
 app.use(session(sessionOptions)); //express-session is used to store the session data in the cookie.
 app.use(Flash());        //express-flash is used to store the flash messages in the session data, and then they are removed from the session data and added to the response object as locals.

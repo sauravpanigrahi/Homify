@@ -28,15 +28,15 @@ router.get("/new", isLoggedin, (req, res) => {
 });
 router.get("/filter", async (req, res) => {
     try {
-        console.log("Query parameters:", req.query.type); // Debugging statement
+        // console.log("Query parameters:", req.query.type); // Debugging statement
         let filter = {};
         if (req.query.type) {
             filter.type = req.query.type;
-            console.log("Type filter applied:", filter.type); // Added debugging statement
+            // console.log("Type filter applied:", filter.type); // Added debugging statement
         } 
       
         // Add more filters as needed
-        console.log("Filter object:", filter);
+        // console.log("Filter object:", filter);
         const filterListing = await Listing.find(filter);
         // console.log("Filtered Listings:", filterListing);
         res.render("listings/filter", { filterListing });
