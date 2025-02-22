@@ -20,7 +20,7 @@ const session=require("express-session");
 const MongoStore = require('connect-mongo');
 const Flash=require("connect-flash"); 
 const passport=require("passport");
-const localStrategy = require("passport-local").Strategy;
+const LocalStrategy = require("passport-local").Strategy;
 const User=require("./models/user.js");
 
 
@@ -79,6 +79,12 @@ app.use(Flash());        //express-flash is used to store the flash messages in 
 
 app.use(passport.initialize());  //it used as middleware to initialize the passport
 app.use(passport.session());    //it is used as middleware to maintain the session. A web application needs the ability to identify user as they browse from page to page. this session of request and response each associated with the same user,is know as a session. basically a user dont need to logic multiple times on the same website of diferent pages.
+
+app.use(passport.initialize());  //it used as middleware to initialize the passport
+app.use(passport.session());    //it is used as middleware to maintain the session. A web application needs the ability to identify user as they browse from page to page. this session of request and response each associated with the same user,is know as a session. basically a user dont need to logic multiple times on the same website of diferent pages.
+passport.use(new LocalStrategy(User.authenticate()));  //passport-local-mongoose provides a authenticate method to the user model. all the request from user are authenticated by local strategy by  function authenticating of passport-local-mongoose.
+passport.serializeUser(User.serializeUser());   //used for serializing the user for the session. it is used to store the user id in the session data.
+passport.deserializeUser(User.deserializeUser()); //used for deserializing the user for the session. it is used to get the user id from the session data and get the user data from the database.
 
 app.use((req, res, next) => {
     res.locals.currUser = req.user;  
