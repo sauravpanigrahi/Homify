@@ -79,14 +79,11 @@ app.use(Flash());        //express-flash is used to store the flash messages in 
 
 app.use(passport.initialize());  //it used as middleware to initialize the passport
 app.use(passport.session());    //it is used as middleware to maintain the session. A web application needs the ability to identify user as they browse from page to page. this session of request and response each associated with the same user,is know as a session. basically a user dont need to logic multiple times on the same website of diferent pages.
-passport.use(new localStrategy(User.authenticate()));  //passport-local-mongoose provides a authenticate method to the user model. all the request from user are authenticated by local strategy by  function authenticating of passport-local-mongoose.
-passport.serializeUser(User.serializeUser());   //used for serializing the user for the session. it is used to store the user id in the session data.
-passport.deserializeUser(User.deserializeUser()); //used for deserializing the user for the session. it is used to get the user id from the session data and get the user data from the database.
 
 app.use((req, res, next) => {
+    res.locals.currUser = req.user;  
     res.locals.success = req.flash("success");     // res.locals is an object that contains response local variables scoped to the request, and therefore available only to the view(s) rendered during that request/response cycle. express-session is used to store the session data in the cookie.
     res.locals.error = req.flash("error"); 
-    res.locals.currUser = req.user;  //req.user is the current user who is logged in. and it is not 
     next();
 });
 
@@ -95,7 +92,7 @@ app.use("/listings/:id/reviews",reviewsRouter);
 app.use("/",userRouter);
 
 app.get("/", (req, res) => {
-    res.render("listings/index"); // For EJS templates
+    res.render("listings/index.ejs"); // For EJS templates
 });
 
 app.all("*", (req, res, next) => {

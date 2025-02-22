@@ -133,7 +133,7 @@ display: flex;
     .search-inp{
         border-radius: 25px;
         width: 15rem;
-        margin-left: ;
+        /* margin-left: ; */
        
     }
     .logo{
@@ -253,6 +253,12 @@ font-weight: 900;
                 width: 100%;
                 padding: 0.5rem 0;
             }
+            .facilities{
+                flex-direction:column;
+                  display: flex;
+                  
+                  width: fit-content;
+              }
         }
          #filters{
             display: flex;
@@ -310,4 +316,32 @@ padding: 0.8rem;
         justify-content: space-between;
         align-items: center;
         width: 100%;
+    }
+    .room{
+        border: none;
+        margin-top:1.5rem ;
+        font-size: x-large;
+    }
+    .owner{
+        height:fit-content;
+        width: 15rem;
+        text-align: left;
+       margin-top: 20px;
+       border: 1px solid gray;
+       border-radius: 5px;
+      
+    }
+    .facilities{
+        /* border: 2px solid black; */
+        display: flex;
+
+        width: fit-content;
+    }
+    .facilities1, .facilities2{
+        margin-top: 10px;
+        width: fit-content;
+        
+    }
+    .facility{
+        list-style: none;
     }
