@@ -97,9 +97,9 @@ app.use("/listings",listingsRouter);
 app.use("/listings/:id/reviews",reviewsRouter);
 app.use("/",userRouter);
 
-app.get("/", (req, res) => {
-    res.render("listings/index.ejs"); // For EJS templates
-});
+app.get("/",(req,res)=>{
+    res.redirect("/listings");
+ });
 
 app.all("*", (req, res, next) => {
     next(new expressError(404, "Page not found"));
