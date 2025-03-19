@@ -249,7 +249,7 @@ font-weight: 900;
                 flex-wrap: nowrap;
 
             }
-            .review,.button{
+            .button{
                 text-align: left;
                 position: relative;
                 right: 10%;
