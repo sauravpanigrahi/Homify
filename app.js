@@ -40,30 +40,34 @@ app.use(express.static(path.join(__dirname,"/public")));
 
 const dbUrl=process.env.ATLASDB_URL;
 
-main()
-.then(()=>{
-    console.log("mongoDB connected");
-})
-.catch((err)=>{
-    console.log(err);
-});
+// MongoDB Connection with error handling
 async function main(){
-    // await mongoose.connect("mongodb://localhost:27017/wanderlust");
-    await mongoose.connect(dbUrl);
+    try {
+        await mongoose.connect(dbUrl);
+        console.log("MongoDB connected successfully");
+    } catch (err) {
+        console.error("MongoDB connection error:", err);
+        process.exit(1); // Exit if cannot connect to database
+    }
 }
+
+main();
+
 const store=MongoStore.create({
     mongoUrl:dbUrl,
     crypto:{
-        secret:"my secretcode"
+        secret:process.env.SECRET || "my secretcode"
     },
     touchAfter:24*3600,
-})
-store.on("error",()=>{
-    console.log("ERROR in MONGO SESSION STORE",err);
-})
+});
+
+store.on("error",(err)=>{
+    console.log("ERROR in MONGO SESSION STORE:", err);
+});
+
 const sessionOptions={
     store,
-    secret:process.env.SECRET,
+    secret:process.env.SECRET || "my secretcode",
     resave:false,
     saveUninitialized:true,
     cookie:{
@@ -73,12 +77,8 @@ const sessionOptions={
     }
 };
 
-
 app.use(session(sessionOptions)); //express-session is used to store the session data in the cookie.
 app.use(Flash());        //express-flash is used to store the flash messages in the session data, and then they are removed from the session data and added to the response object as locals.
-
-app.use(passport.initialize());  //it used as middleware to initialize the passport
-app.use(passport.session());    //it is used as middleware to maintain the session. A web application needs the ability to identify user as they browse from page to page. this session of request and response each associated with the same user,is know as a session. basically a user dont need to logic multiple times on the same website of diferent pages.
 
 app.use(passport.initialize());  //it used as middleware to initialize the passport
 app.use(passport.session());    //it is used as middleware to maintain the session. A web application needs the ability to identify user as they browse from page to page. this session of request and response each associated with the same user,is know as a session. basically a user dont need to logic multiple times on the same website of diferent pages.
@@ -123,5 +123,5 @@ app.use((err, req, res, next) => {
     res.status(status).render("listings/error.ejs", { msg });
 });
 app.listen(port,()=>{
-    console.log(`listening to the port ${port}`);
+    console.log(`Server is running on port ${port}`);
 });

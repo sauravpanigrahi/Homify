@@ -1,116 +1,109 @@
 <% layout("/layouts/boilerplate") %>
 <body>
-    <div class="row mt-3">
-        <div class="col-6 offset-3">
-            <h3><b><%= listing.title %></b></h3>
+<div class="row mt-3">
+    <div class="col-6 offset-2">
+        <h3><b><%= listing.title %></b></h3>
+    </div>
+</div>
+<div class="card col-6 offset-2 show-card">
+    <% if (listing.image && listing.image.url) { %>
+        <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="<%= listing.title %>">
+    <% } else { %>
+        <img src="/images/default-listing.jpg" class="card-img-top show-img" alt="Default listing image">
+    <% } %>
+    <div class="card-body">
+        <p class="card-text room"><b>Room in <%= listing.location %>,<%= listing.country %></b></p>
+        <div class="owner">
+            <p class="card-text"><b>Hosted by <%= listing.Owner.username %> </b></p>
+            2 Years of hosting
         </div>
-    </div> <!-- Closing the div tag properly -->
-    <div class="card col-6 offset-2 show-card">
-        <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image">
-        <!-- Log to check if the image object exists and has a URL -->
-        <div class="card-body">
-            <p class="card-text  room"><b>Room in <%= listing.location %>,<%= listing.country %></b><br></p>
-            <div class="owner">
-                <p class="card-text  "><b>Hosted by <%= listing.Owner.username %> </b></p>
-                2 Years of hosting
+        <hr>
+        <br>
+        <div class="facilities1">
+            <div class="facility">
+                <p><i class="fa-solid fa-bed"></i> <b style="margin-left:8px;">Room in a <%= listing.type %> stay</b><br>
+                   <span style="margin-left:28px; font-size: smaller;">Your own room in a home, plus access to shared spaces.</span></p>
             </div>
-            <hr>
-            <br>
-            <div class="facilities1">
-                <div class="facility">
-                    <p><i class="fa-solid fa-bed"></i> <b style="margin-left:8px ;"  >Room in a <%= listing.type %> stay</b><br>
-                       <h9 style="margin-left:28px ; font-size: smaller; "> Your own room in a home, plus access to shared spaces.</h9></p>
-                </div>
-                <div class="facility">
-                    <p><i class="fa-solid fa-key"></i> <b style="margin-left:10px ;">Great check-in experience</b><br>
-                        <h9 style="margin-left:28px ; font-size: smaller; "> Recent guests loved the smooth start to this stay.</h9>
-                        </p>
-                </div>
-                <div class="facility">
-                    <p><i class="fa-solid fa-calendar"></i> <b style="margin-left:10px ;">Free cancellation before 8 Mar</b><br>
-                        <h9 style="margin-left:28px ; font-size: smaller; "> Get a full refund if you change your mind.</h9>
-                        </p>
-                </div>
+            <div class="facility">
+                <p><i class="fa-solid fa-key"></i> <b style="margin-left:10px;">Great check-in experience</b><br>
+                    <span style="margin-left:28px; font-size: smaller;">Recent guests loved the smooth start to this stay.</span></p>
             </div>
-            <hr>
-            <p style="margin-top: 10px;"><b>About the place</b></p>
-            <p class="card-text"><%= listing.description %></p>
-            <h4>What this place offer </h4>
-            <div class="facilities">
-                <ul class="facilities1">
-                    <li class="facility">
-                        <p><i class="fa-solid fa-building-lock"></i> 
-                           <h9 style="margin-left:8px ; font-size: smaller; ">Lock on bedroom door .</h9></p>
-                    </li>
-                    <li class="facility">
-                        <p><i class="fa-solid fa-utensils"></i> 
-                           <h9 style="margin-left:8px ; font-size: smaller; ">Kitchen.</h9></p>
-                    </li>
-                    <li class="facility">
-                        <p><i class="fa-solid fa-bed"></i> 
-                           <h9 style="margin-left:8px ; font-size: smaller; "> Wifi</h9></p>
-                    </li>
-                    <li class="facility">
-                        <p><i class="fa-solid fa-couch"></i> 
-                           <h9 style="margin-left:8px ; font-size: smaller; ">Dedicated workspace </h9></p>
-                    </li>
-                    <li class="facility">
-                        <p><i class="fa-solid fa-car"></i> 
-                           <h9 style="margin-left:8px ; font-size: smaller; ">Free parking on premises</h9></p>
-                    </li>
-                </ul>
-                <ul class="facilities2">
-                    <li class="facility">
-                        <p><i class="fa-solid fa-paw"></i> 
-                           <h9 style="margin-left:8px ; font-size: smaller; ">Pets allowed</h9></p>
-                    </li>
-                    <li class="facility">
-                        <p><i class="fa-solid fa-bath"></i> 
-                           <h9 style="margin-left:8px ; font-size: smaller; ">Bath</h9></p>
-                    </li>
-                    <li class="facility">
-                        <p><i class="fa-solid fa-torii-gate"></i>
-                           <h9 style="margin-left:8px ; font-size: smaller; "> Private patio or balcony</h9></p>
-                    </li>
-                    <li class="facility">
-                        <p><i class="fa-solid fa-ban-smoking"></i>
-                           <h9 style="margin-left:8px ; font-size: smaller;  text-decoration: line-through; ">Carbon monoxide alarm </h9></p>
-                    </li>
-                    <li class="facility">
-                        <p><i class="fa-solid fa-bell"></i>
-                           <h9 style="margin-left:8px ; font-size: smaller; text-decoration: line-through; ">Smoke alarm</h9></p>
-                    </li>
-
-                </ul>
-                </div>
-                <p class="card-text " style="font-size: x-large;"><b> price:</b>&#8377;<%= listing.price.toLocaleString("en-IN") %></p>
-
+            <div class="facility">
+                <p><i class="fa-solid fa-calendar"></i> <b style="margin-left:10px;">Free cancellation before 8 Mar</b><br>
+                    <span style="margin-left:28px; font-size: smaller;">Get a full refund if you change your mind.</span></p>
+            </div>
+        </div>
+        <hr>
+        <p style="margin-top: 10px;"><b>About the place</b></p>
+        <p class="card-text"><%= listing.description %></p>
+        <h4>What this place offers</h4>
+        <div class="facilities">
+            <ul class="facilities1">
+                <li class="facility">
+                    <p><i class="fa-solid fa-building-lock"></i> 
+                       <span style="margin-left:8px; font-size: smaller;">Lock on bedroom door</span></p>
+                </li>
+                <li class="facility">
+                    <p><i class="fa-solid fa-utensils"></i> 
+                       <span style="margin-left:8px; font-size: smaller;">Kitchen</span></p>
+                </li>
+                <li class="facility">
+                    <p><i class="fa-solid fa-bed"></i> 
+                       <span style="margin-left:8px; font-size: smaller;">Wifi</span></p>
+                </li>
+                <li class="facility">
+                    <p><i class="fa-solid fa-couch"></i> 
+                       <span style="margin-left:8px; font-size: smaller;">Dedicated workspace</span></p>
+                </li>
+                <li class="facility">
+                    <p><i class="fa-solid fa-car"></i> 
+                       <span style="margin-left:8px; font-size: smaller;">Free parking on premises</span></p>
+                </li>
+            </ul>
+            <ul class="facilities2">
+                <li class="facility">
+                    <p><i class="fa-solid fa-paw"></i> 
+                       <span style="margin-left:8px; font-size: smaller;">Pets allowed</span></p>
+                </li>
+                <li class="facility">
+                    <p><i class="fa-solid fa-bath"></i> 
+                       <span style="margin-left:8px; font-size: smaller;">Bath</span></p>
+                </li>
+                <li class="facility">
+                    <p><i class="fa-solid fa-torii-gate"></i>
+                       <span style="margin-left:8px; font-size: smaller;">Private patio or balcony</span></p>
+                </li>
+                <li class="facility">
+                    <p><i class="fa-solid fa-ban-smoking"></i>
+                       <span style="margin-left:8px; font-size: smaller; text-decoration: line-through;">Carbon monoxide alarm</span></p>
+                </li>
+                <li class="facility">
+                    <p><i class="fa-solid fa-bell"></i>
+                       <span style="margin-left:8px; font-size: smaller; text-decoration: line-through;">Smoke alarm</span></p>
+                </li>
+            </ul>
+        </div>
+        <p class="card-text" style="font-size: x-large;"><b>Price:</b> &#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "Price not available" %></p>
     </div>
-   
-   <% if(currUser && currUser._id.equals(listing.Owner._id)) { %>
-    <div class="btns ">
-        <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark offset-0 add-btn bt-1  button">Edit </a>
-        <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
-            <button class="btn btn-dark offset-4 button ">Delete </button>   
-        </form>  
-    </div>
+</div>
 
-   <% } %>
-    
-    <div class="col-8 offset-0 review">
-        <hr/>
-        <% if (currUser) { %>
-        <h4>Leave a Review</h4>
-        <form action="/listings/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation">
-            <!-- <div class="mb-3 mt-3">
-                
-                <input type="range" min="1" max="5" name="review[rating]" id="rating" class="form-range">
-           </div> -->
-            <div class="mb-3 mt-3">
-                <label for="rating" class="form-label"><b>Rating</b></label>
+<% if(currUser && currUser._id.equals(listing.Owner._id)) { %>
+<div class="btns">
+    <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark offset-0 add-btn bt-1 button">Edit</a>
+    <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+        <button class="btn btn-dark offset-4 button">Delete</button>   
+    </form>  
+</div>
+<% } %>
 
+<div class="col-8 offset-0 review">
+    <hr/>
+    <% if (currUser) { %>
+    <h4>Leave a Review</h4>
+    <form action="/listings/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation">
+        <div class="mb-3 mt-3">
+            <label for="rating" class="form-label"><b>Rating</b></label>
             <fieldset class="starability-slot">
-        
                 <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
                 <input type="radio" id="first-rate1" name="review[rating]" value="1" />
                 <label for="first-rate1" title="Terrible">1 star</label>
@@ -124,19 +117,20 @@
                 <label for="first-rate5" title="Amazing">5 stars</label>
             </fieldset>
         </div>
-            <div class="mb-3 mt-3">
-                <label for="comment" class="form-label">Comments</label>
-                <textarea name="review[comment]" cols="30" rows="5" class="form-control" required></textarea>
-                <div class="invalid-feedback">
-                    Please add some comments for reviews
-                </div>
+        <div class="mb-3 mt-3">
+            <label for="comment" class="form-label">Comments</label>
+            <textarea name="review[comment]" cols="30" rows="5" class="form-control" required></textarea>
+            <div class="invalid-feedback">
+                Please add some comments for reviews
             </div>
-            <button class="btn btn-outline-dark">Submit</button>
-        </form>
-        <% } %>
-        <hr/>
-        <p><b>All Reviews</b></p>
-        <div class="row ">
+        </div>
+        <button class="btn btn-outline-dark">Submit</button>
+    </form>
+    <% } %>
+    <hr/>
+    <p><b>All Reviews</b></p>
+    <div class="row">
+        <% if (listing.reviews && listing.reviews.length > 0) { %>
             <% for(let review of listing.reviews) { %>
                 <div class="card mb-3 ms-3 col-5 border border-dark">
                     <div class="card-body">
@@ -145,36 +139,36 @@
                             Rated: <%= review.rating %> 
                         </p>
                         <p class="card-text mb-2"><b><i><%= review.comment %></i></b></p>
-                       
                     </div>
-                    <div class="flex ">
+                    <div class="flex">
                         <% if (currUser) { %>
                         <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
                             <button class="btn btn-dark btn-sm mb-2 ms-2">Delete</button>
                         </form>
-                        <a href="/listings/<%= listing._id %>/reviews/<%= review._id %>/edit" class="btn add-btn  mb-3">Edit </a>
+                        <a href="/listings/<%= listing._id %>/reviews/<%= review._id %>/edit" class="btn add-btn mb-3">Edit</a>
                         <% } %>
                     </div>
                 </div>
             <% } %>
-        </div>
+        <% } else { %>
+            <p>No reviews yet. Be the first to review!</p>
+        <% } %>
     </div>
-    <br>
-    <div class="map-container offset-0 show-card rounded-2"> 
-        <!-- ratio ratio-16x9 it is a Bootstrap utility class that maintains a 16:9 aspect ratio for the map -->
-        <div class="ratio ratio-16x9">                                
-            <iframe 
-                class="w-100 h-100"
-                frameborder="0" 
-                scrolling="no" 
-                marginheight="0" 
-                marginwidth="0"  
-                id="gmap_canvas" 
-                src="https://maps.google.com/maps?width=100%&amp;height=100%&amp;hl=en&amp;q=%20<%=listing.location%>%20+()&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
-            </iframe>
-        </div>
+</div>
+<br>
+<div class="map-container offset-0 show-card rounded-2"> 
+    <div class="ratio ratio-16x9">                                
+        <iframe 
+            class="w-100 h-100"
+            frameborder="0" 
+            scrolling="no" 
+            marginheight="0" 
+            marginwidth="0"  
+            id="gmap_canvas" 
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://maps.google.com/maps?width=100%&amp;height=100%&amp;hl=en&amp;q=%20<%=listing.location%>%20+()&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+        </iframe>
     </div>
-    
-    
-    </div>
+</div>
 </body>
