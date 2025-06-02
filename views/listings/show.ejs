@@ -1,11 +1,11 @@
 <% layout("/layouts/boilerplate") %>
 <body>
     <div class="row mt-3">
-        <div class="col-6 offset-3">
+        <div class="col-8 offset-3">
             <h3><b><%= listing.title %></b></h3>
         </div>
     </div> <!-- Closing the div tag properly -->
-    <div class="card col-6 offset-2 show-card">
+    <div class="card col-6 offset-3 show-card">
         <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image">
         <!-- Log to check if the image object exists and has a URL -->
         <div class="card-body">
@@ -97,7 +97,7 @@
 
    <% } %>
     
-    <div class="col-8 offset-0 review">
+    <div class="col-8 offset-0 ">
         <hr/>
         <% if (currUser) { %>
         <h4>Leave a Review</h4>
