@@ -53,43 +53,48 @@ async function main(){
 
 main();
 
-const store=MongoStore.create({
-    mongoUrl:dbUrl,
-    crypto:{
-        secret:process.env.SECRET || "my secretcode"
-    },
-    touchAfter:24*3600,
+// Session configuration
+const secret = process.env.SECRET || 'thisisasecret';
+
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 3600, // time period in seconds
+    crypto: {
+        secret: secret
+    }
 });
 
-store.on("error",(err)=>{
-    console.log("ERROR in MONGO SESSION STORE:", err);
+store.on("error", function(e) {
+    console.log("SESSION STORE ERROR", e);
 });
 
-const sessionOptions={
+const sessionConfig = {
     store,
-    secret:process.env.SECRET || "my secretcode",
-    resave:false,
-    saveUninitialized:true,
-    cookie:{
-        expires:Date.now()+7*24*60*60*1000,
-        maxAge:7*24*60*60*1000,
-        httpOnly:true,
+    name: 'session',
+    secret: secret,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
     }
 };
 
-app.use(session(sessionOptions)); //express-session is used to store the session data in the cookie.
-app.use(Flash());        //express-flash is used to store the flash messages in the session data, and then they are removed from the session data and added to the response object as locals.
+app.use(session(sessionConfig));
+app.use(Flash());
 
-app.use(passport.initialize());  //it used as middleware to initialize the passport
-app.use(passport.session());    //it is used as middleware to maintain the session. A web application needs the ability to identify user as they browse from page to page. this session of request and response each associated with the same user,is know as a session. basically a user dont need to logic multiple times on the same website of diferent pages.
-passport.use(new LocalStrategy(User.authenticate()));  //passport-local-mongoose provides a authenticate method to the user model. all the request from user are authenticated by local strategy by  function authenticating of passport-local-mongoose.
-passport.serializeUser(User.serializeUser());   //used for serializing the user for the session. it is used to store the user id in the session data.
-passport.deserializeUser(User.deserializeUser()); //used for deserializing the user for the session. it is used to get the user id from the session data and get the user data from the database.
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
+// Middleware to set user data for all routes
 app.use((req, res, next) => {
-    res.locals.currUser = req.user;  
-    res.locals.success = req.flash("success");     // res.locals is an object that contains response local variables scoped to the request, and therefore available only to the view(s) rendered during that request/response cycle. express-session is used to store the session data in the cookie.
-    res.locals.error = req.flash("error"); 
+    res.locals.currUser = req.user;
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
     next();
 });
 

@@ -21,11 +21,18 @@
             <div class="navbar-nav ms-auto">
                 <a class="nav-link new" href="/listings/new"><b>HomiFy your home</b></a>
                 <button id="toggle-theme" class="nav-link new">Dark Mode</button>
-                <% if (!currUser) { %>
+                <% if (typeof currUser === 'undefined' || !currUser) { %>
                     <a class="nav-link new mt-2" href="/signup"><b>Sign Up</b></a>
                     <a class="nav-link new mt-2" href="/login"><b>Log In</b></a>
                 <% } else { %>
-                    <a class="nav-link new mt" href="/logout"><b>Log Out</b></a>
+                    <div class="dropdown">
+                        <button class="btn btn-link nav-link new dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-user"></i> <%= currUser.username %>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="/logout"><b>Log Out</b></a></li>
+                        </ul>
+                    </div>
                 <% } %>
             </div>
         </div>
