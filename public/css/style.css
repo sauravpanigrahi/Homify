@@ -22,7 +22,7 @@ body{
     --text-color: white;
     --navbar-bg-color: black;
     --navbar-text-color: white;
-    --border-color:0.5px solid white;
+    --border-color:1px solid white;
 }
 .navbar{
     width: 100%;
@@ -191,7 +191,7 @@ font-weight: 900;
           
            font-size: 14px;
             border-radius: 30px;
-            background-color: whitesmoke;
+            /* background-color: whitesmoke; */
         }
         @media (max-width: 992px) {
             .container-fluid {
